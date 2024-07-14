@@ -1,0 +1,42 @@
+class Solution {
+    public int minimumCost(int m, int n, int[] h, int[] v)
+    {
+        int ans=0;
+        int vcuts=1;
+        int hcuts=1;
+        Arrays.sort(h);
+        Arrays.sort(v);
+        int i=h.length-1;
+        int j=v.length-1;
+        while(i>=0 && j>=0)
+        {
+            if(h[i]>v[j])
+            {
+                ans=ans+vcuts*h[i];
+                hcuts++;
+                i--;
+            }
+            else
+            {
+                ans=ans+(hcuts*v[j]);
+                vcuts++;
+                j--;
+            }
+        }
+        while(i>=0)
+        {
+            ans=ans+vcuts*h[i];
+                hcuts++;
+                i--;
+        }
+        while(j>=0)
+        {
+             ans+=(hcuts*v[j]);
+             vcuts++;
+             j--;
+        }
+        return ans;
+        
+    }
+}
+//i traverse from the right because descend sort is difficult in java.
